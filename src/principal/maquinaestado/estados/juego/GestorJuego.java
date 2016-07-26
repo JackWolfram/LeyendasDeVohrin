@@ -6,9 +6,7 @@
 package principal.maquinaestado.estados.juego;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import principal.maquinaestado.EstadoJuego;
-import principal.sprites.HojaSprites;
 
 /**
  *
@@ -17,7 +15,6 @@ import principal.sprites.HojaSprites;
 public class GestorJuego implements EstadoJuego{
 
     private GestorMapa gestorMapa;
-    HojaSprites hs = new HojaSprites("/recursos/imagenes/hojasTexturas/1.png", 16, false);
     
     @Override
     public void actualizar() {
@@ -26,8 +23,6 @@ public class GestorJuego implements EstadoJuego{
 
     @Override
     public void dibujar(Graphics g) {
-        BufferedImage imagen = hs.obtenerSprite(0, 0).obtenerImagen();
-        g.drawImage(imagen, 100, 100, null);
     }
     
 }
