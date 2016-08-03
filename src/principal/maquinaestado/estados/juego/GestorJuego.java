@@ -5,7 +5,9 @@
  */
 package principal.maquinaestado.estados.juego;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import principal.mapas.Mapa;
 import principal.maquinaestado.EstadoJuego;
 
 /**
@@ -15,6 +17,7 @@ import principal.maquinaestado.EstadoJuego;
 public class GestorJuego implements EstadoJuego{
 
     private GestorMapa gestorMapa;
+    Mapa mapa = new Mapa("/recursos/texto/mapa.ldv");
     
     @Override
     public void actualizar() {
@@ -23,6 +26,8 @@ public class GestorJuego implements EstadoJuego{
 
     @Override
     public void dibujar(Graphics g) {
+        g.setColor(Color.white);
+        //g.drawString(mapa.contenido, 10, 10);
     }
     
 }
