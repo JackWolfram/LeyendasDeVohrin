@@ -26,11 +26,7 @@ public class GestorJuego implements EstadoJuego{
 
     @Override
     public void dibujar(Graphics g) {
-        g.setColor(Color.white);
-        
-        for(int i = 0; i < mapa.obtenerPaleta().length; i++) {
-            g.drawImage(mapa.obtenerSpritePaleta(i).obtenerImagen(), i*16, 0, null);
-        }
+        mapa.dibujar(g);
     }
     
 }

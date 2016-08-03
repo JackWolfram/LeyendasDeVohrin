@@ -5,6 +5,8 @@
  */
 package principal.mapas;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import principal.herramientas.CargadorRecursos;
 import principal.sprites.HojaSprites;
@@ -119,23 +121,15 @@ public class Mapa {
         return vectorSprites;
     }
     
-    public int obtenerAncho() {
-        return this.ancho;
+    public void dibujar(Graphics g) {
+        int anchoSprite = this.paleta[0].obtenerAncho();
+        int altoSprite = this.paleta[0].obtenerAlto();
+        
+        for(int y = 0; y < this.alto; y++) {
+            for (int x = 0; x < this.ancho; x++) {
+                BufferedImage imagen = paleta[sprites[x + y * this.ancho]].obtenerImagen();
+                g.drawImage(imagen, x * anchoSprite, y * altoSprite, null);
+            }
+        }
     }
-    
-    public int obtenerAlto() {
-        return this.alto;
-    }
-    
-    public Sprite obtenerSpritePaleta(final int indice) {
-        return paleta[indice];
-    }
-    
-    public Sprite obtenerSpritePaleta(final int x, final int y) {
-        return paleta[x + y * this.ancho];
-    }
-    
-    public Sprite[] obtenerPaleta() {
-    return this.paleta;
-}
 }
