@@ -7,6 +7,7 @@ package principal.mapas;
 
 import java.util.ArrayList;
 import principal.herramientas.CargadorRecursos;
+import principal.sprites.HojaSprites;
 import principal.sprites.Sprite;
 
 /**
@@ -42,7 +43,7 @@ public class Mapa {
         String paletaEntera = partes[3];
         String[] partesPaleta = paletaEntera.split("#");
         
-        paleta = new Sprite[partesPaleta.length];
+        paleta = asignarSprites(partesPaleta, hojasSeparadas);
         
         String colisionesEnteras = partes[4];
         colisiones = extraerColisiones(colisionesEnteras);
@@ -52,11 +53,25 @@ public class Mapa {
         
         sprites = extraerSprites(cadenasSprites);
         
-        System.out.println(sprites.length);
         
-//        for (int i = 0; i < sprites.length; i++) {
-//            System.out.println(sprites[i]);
-//        }
+    }
+    
+    private Sprite[] asignarSprites(final String[] partesPaleta, final String[] hojasSeparadas) {
+        Sprite[] paleta = new Sprite[partesPaleta.length];
+        
+        HojaSprites hoja = new HojaSprites("/recursos/imagenes/hojasTexturas/" + hojasSeparadas[0] + ".png", 16, true);
+        
+        for(int i = 0; i < partesPaleta.length; i++) {
+            String spriteTemporal = partesPaleta[i];
+            String[] partesSprite = spriteTemporal.split("-");
+            
+            int indicePaleta = Integer.parseInt(partesSprite[0]);
+            int indiceSpriteHoja = Integer.parseInt(partesSprite[2]);
+            
+            paleta[indicePaleta] = hoja.obtenerSprite(indiceSpriteHoja);
+        }
+        
+        return paleta;
     }
     
     private boolean[] extraerColisiones (final String cadenaColisiones) {
@@ -103,4 +118,24 @@ public class Mapa {
         
         return vectorSprites;
     }
+    
+    public int obtenerAncho() {
+        return this.ancho;
+    }
+    
+    public int obtenerAlto() {
+        return this.alto;
+    }
+    
+    public Sprite obtenerSpritePaleta(final int indice) {
+        return paleta[indice];
+    }
+    
+    public Sprite obtenerSpritePaleta(final int x, final int y) {
+        return paleta[x + y * this.ancho];
+    }
+    
+    public Sprite[] obtenerPaleta() {
+    return this.paleta;
+}
 }
