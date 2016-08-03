@@ -61,7 +61,7 @@ public class Mapa {
     private Sprite[] asignarSprites(final String[] partesPaleta, final String[] hojasSeparadas) {
         Sprite[] paleta = new Sprite[partesPaleta.length];
         
-        HojaSprites hoja = new HojaSprites("/recursos/imagenes/hojasTexturas/" + hojasSeparadas[0] + ".png", 16, true);
+        HojaSprites hoja = new HojaSprites("/imagenes/hojasTexturas/" + hojasSeparadas[0] + ".png", 16, true);
         
         for(int i = 0; i < partesPaleta.length; i++) {
             String spriteTemporal = partesPaleta[i];

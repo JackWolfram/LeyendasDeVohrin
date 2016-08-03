@@ -31,7 +31,7 @@ public class GestorPrincipal {
     }
     
     public static void main(String[] args) {
-        GestorPrincipal gp = new GestorPrincipal("Leyendas de Vohrin", 240, 160);
+        GestorPrincipal gp = new GestorPrincipal("Leyendas de Vohrin", 640, 360);
         
         gp.iniciarJuego();
         gp.iniciarBuclePrincipal();
@@ -98,5 +98,4 @@ public class GestorPrincipal {
     private void dibujar() {
         sd.dibujar(ge);
     }
-    
 }

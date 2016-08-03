@@ -5,8 +5,10 @@
  */
 package principal.maquinaestado.estados.juego;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import principal.GestorPrincipal;
+import principal.herramientas.CargadorRecursos;
 import principal.mapas.Mapa;
 import principal.maquinaestado.EstadoJuego;
 
@@ -16,8 +18,8 @@ import principal.maquinaestado.EstadoJuego;
  */
 public class GestorJuego implements EstadoJuego{
 
-    private GestorMapa gestorMapa;
-    Mapa mapa = new Mapa("/recursos/texto/mapa.ldv");
+    Mapa mapa = new Mapa("/texto/mapa.ldv");
+    BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/iconos/Logo.png");
     
     @Override
     public void actualizar() {
@@ -27,6 +29,7 @@ public class GestorJuego implements EstadoJuego{
     @Override
     public void dibujar(Graphics g) {
         mapa.dibujar(g);
+        g.drawImage(logo, 640 - logo.getWidth() - 5, 360 - logo.getHeight() - 5, null);
     }
     
 }
