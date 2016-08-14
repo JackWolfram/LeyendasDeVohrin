@@ -5,6 +5,8 @@
  */
 package principal.herramientas;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
@@ -24,75 +26,92 @@ import javax.imageio.ImageIO;
  * @author Jack_Wolfram
  */
 public class CargadorRecursos {
+
     public static BufferedImage cargarImagenCompatibleOpaca(final String ruta) {
         Image imagen = null;
-        
+
         try {
             imagen = ImageIO.read(ClassLoader.class.getResource(ruta));
         } catch (IOException ex) {
             Logger.getLogger(CargadorRecursos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        
+
         BufferedImage imagenAcelerada;
         imagenAcelerada = gc.createCompatibleImage(imagen.getWidth(null), imagen.getHeight(null), Transparency.OPAQUE);
-        
+
         Graphics g = imagenAcelerada.getGraphics();
         g.drawImage(imagen, 0, 0, null);
         g.dispose();
-        
+
         return imagenAcelerada;
     }
-    
+
     public static BufferedImage cargarImagenCompatibleTranslucida(final String ruta) {
         Image imagen = null;
-        
+
         try {
             imagen = ImageIO.read(ClassLoader.class.getResource(ruta));
         } catch (IOException ex) {
             Logger.getLogger(CargadorRecursos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        
+
         BufferedImage imagenAcelerada;
         imagenAcelerada = gc.createCompatibleImage(imagen.getWidth(null), imagen.getHeight(null), Transparency.TRANSLUCENT);
-        
+
         Graphics g = imagenAcelerada.getGraphics();
         g.drawImage(imagen, 0, 0, null);
         g.dispose();
-        
+
         return imagenAcelerada;
     }
-    
+
     public static String leerArchivoTexto(final String ruta) {
         String contenido = "";
-        
+
         InputStream entradaBytes = ClassLoader.class.getResourceAsStream(ruta);
         BufferedReader lector = new BufferedReader(new InputStreamReader(entradaBytes));
-        
+
         String linea;
-        
+
         try {
-            while((linea = lector.readLine()) != null) {
+            while ((linea = lector.readLine()) != null) {
                 contenido += linea;
             }
         } catch (IOException ex) {
             Logger.getLogger(CargadorRecursos.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                if(entradaBytes != null) {
+                if (entradaBytes != null) {
                     entradaBytes.close();
                 }
                 if (lector != null) {
                     lector.close();
                 }
             } catch (IOException ex) {
-                    Logger.getLogger(CargadorRecursos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CargadorRecursos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return contenido;
+    }
+
+    public static Font cargarFuente(final String ruta) {
+        Font fuente = null;
+
+        InputStream entradaBytes = ClassLoader.class.getResourceAsStream(ruta);
+
+        try {
+            fuente = Font.createFont(Font.TRUETYPE_FONT, entradaBytes);
+        } catch (FontFormatException | IOException ex) {
+            Logger.getLogger(CargadorRecursos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        fuente = fuente.deriveFont(12f);
+
+        return fuente;
     }
 }
